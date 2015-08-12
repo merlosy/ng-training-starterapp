@@ -1,0 +1,36 @@
+<div ng-controller="PersonListController">
+	<form class="form-horizontal" ng-submit="addPerson(newFriend)" novalidate>
+		<div class="form-group">
+			<label class="control-label col-md-3" for="new-friend">Nouveau contact :</label>
+			<div class="col-md-6">
+				<input class="form-control" id="new-friend" type="text" ng-model="newFriend">
+			</div>
+			<div class="col-md-2">
+				<button class="btn btn-primary" type="submit" >
+					<span class="glyphicon glyphicon-plus"></span> Ajouter
+				</button>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3" for="friend-filter">Filtrer :</label>
+			<div class="col-md-6">
+				<input class="form-control" id="friend-filter" type="search" ng-model="friendFilter">
+			</div>
+		</div>
+	</form>
+	<p>Mes amis sont :</p>
+	<ul>
+		<li ng-repeat="person in people | orderBy:'firstname' | filter:friendFilter">
+			{{person.firstname}} 
+			<button type="button" class="btn btn-xs btn-default btn-simple" ng-click="toggleFavorite(person)">
+				<span class="glyphicon glyphicon-heart"
+					ng-class="{'text-red' : person.favorite}">
+				</span>
+			</button>
+			<button class="btn btn-xs btn-primary" type="button" ng-click="seePerson(person)">Voir</a>
+			<button class="btn btn-xs btn-danger" type="button" ng-click="removePerson(person)" aria-label="Supprimer" title="Supprimer">
+				<span class="glyphicon glyphicon-remove"></span>
+			</button>
+		</li>
+	</ul>
+</div>

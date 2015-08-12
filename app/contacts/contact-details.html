@@ -1,0 +1,10 @@
+<div ng-controller="PersonDetailsController">
+	<p ng-show="!person">
+		Sélectionnez un contact...
+	</p>
+	<div ng-show="person">
+		<p>La personne est : {{person.id}}</p>
+		<p>Son nom est {{person.firstname}}</p>
+		<p ng-show="person.favorite">C'est ton super pote!</p>
+	</div>
+</div>
