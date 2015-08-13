@@ -88,7 +88,7 @@
 
         $scope.$watch('contactMode', function(newVal){
             if (newVal==='edit') $scope.editablePerson = angular.copy($scope.person);
-        })
+        });
 
         $scope.updateContact = function () {
             ContactsService.update({id: $scope.editablePerson.id}, $scope.editablePerson, function(data){

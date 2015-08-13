@@ -34,10 +34,10 @@
     }]);
 
     app.controller('MainController', ['$scope', '$log', function($scope, $log){
-        $log.debug("MainController");
+        $log.debug('MainController');
 
         $scope.isEmpty = function(str) {
-            return angular.isUndefined(str) || str==null || str=="" ; 
+            return angular.isUndefined(str) || str===null || str==='' ; 
         };
 
     }]);

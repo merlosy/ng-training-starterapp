@@ -411,9 +411,9 @@ module.exports = function (grunt) {
       ]);
     }
 
-    if (target == 'travis') {
+    if (target === 'travis') {
       grunt.task.run([
-        'jshint', 
+        //'jshint', 
         'nodeunit'
       ]);
     }
