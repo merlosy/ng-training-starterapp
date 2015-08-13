@@ -1,4 +1,4 @@
-(function(){
+(function(angular){
 	'use strict'
 
 	var app = angular.module('myapp.contacts.services', ['ngResource']);
@@ -18,4 +18,4 @@
         
     }]);
 
-})();
+})(angular);
