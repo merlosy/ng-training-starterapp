@@ -360,7 +360,7 @@ module.exports = function (grunt) {
       junit: {
         configFile : 'test/karma-jenkins.conf.js'
       },
-      dev: {
+      dist: {
         configFile : 'test/karma.conf.js'
       }
     },
@@ -417,21 +417,17 @@ module.exports = function (grunt) {
 
     if (target === 'travis') {
       grunt.task.run([
-        //'jshint', 
-        'karma:dev'
+        'build',
+        'karma:dist'
       ]);
     }
     else {
       grunt.task.run([
         'connect:test',
-        'karma:dev'
+        'karma:dist'
       ]);
     }
   });
-
-  grunt.registerTask('test-junit', [ 'build', 'karma:junit' ]);
-  
-  grunt.registerTask('test-ci', [ 'build', 'karma:continuous']);
 
   grunt.registerTask('build', [
     'clean:dist',
