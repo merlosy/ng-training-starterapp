@@ -1,6 +1,6 @@
 # AngularJS Starter Application 
 [![Build Status](https://travis-ci.org/merlosy/ng-training-starterapp.svg)](https://travis-ci.org/merlosy/ng-training-starterapp)
-[![Coverage Status](http://img.shields.io/coveralls/merlosy/ng-training-starterapp.svg?)](https://coveralls.io/r/merlosy/ng-training-starterapp.svg?branch=master)
+[![Coverage Status](https://coveralls.io/repos/merlosy/ng-training-starterapp/badge.svg?branch=master&service=github)](https://coveralls.io/github/merlosy/ng-training-starterapp?branch=master)
 
 Basé sur Yeoman generators:
 - generator-webapp
