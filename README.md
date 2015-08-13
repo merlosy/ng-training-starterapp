@@ -20,7 +20,7 @@ Basé sur Yeoman generators:
 - Utiliser votre API existant
 
 ou
-- Installer [Deployd] (~5min pour être opérationnel)
+- Installer [Deployd] - (~5min pour être opérationnel)
 
 ## Installation
 ```
