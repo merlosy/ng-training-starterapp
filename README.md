@@ -1,4 +1,5 @@
-# AngularJS Starter Application
+# AngularJS Starter Application 
+[![Build Status](https://travis-ci.org/merlosy/ng-training-starterapp.svg)](https://travis-ci.org/merlosy/ng-training-starterapp)
 
 Basé sur Yeoman generators:
 - generator-webapp
