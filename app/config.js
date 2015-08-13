@@ -1,4 +1,4 @@
-(function(angular) {
+(function() {
 
    'use strict';
 
@@ -13,4 +13,4 @@
    		apiVersion: '/'
 	});
 
-})(angular);
+})();

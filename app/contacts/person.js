@@ -1,4 +1,4 @@
-(function(angular){
+(function(){
 	'use strict'
 
 	var app = angular.module('myapp.contacts.person', []);
