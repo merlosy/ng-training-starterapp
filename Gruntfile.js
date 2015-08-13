@@ -137,6 +137,10 @@ module.exports = function (grunt) {
       ]
     },
 
+    nodeunit: {
+      all: ['test/spec/**/*.js']
+    },
+
     // Mocha testing framework configuration options
     // mocha: {
     //   all: {
@@ -407,10 +411,18 @@ module.exports = function (grunt) {
       ]);
     }
 
-    grunt.task.run([
-      'connect:test',
-      'karma:dev'
-    ]);
+    if (target == 'travis') {
+      grunt.task.run([
+        'jshint', 
+        'nodeunit'
+      ]);
+    }
+    else {
+      grunt.task.run([
+        'connect:test',
+        'karma:dev'
+      ]);
+    }
   });
 
   grunt.registerTask('test-junit', [ 'build', 'karma:junit' ]);
