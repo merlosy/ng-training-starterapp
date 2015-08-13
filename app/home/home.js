@@ -4,4 +4,4 @@
 
 	var app = angular.module('myapp.home', []);
 
-})(angular);
+})();

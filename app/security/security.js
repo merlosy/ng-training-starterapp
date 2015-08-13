@@ -4,4 +4,4 @@
     var securityServicesModule = angular.module('myapp.security', []);
     
     
-})(angular);
+})();
