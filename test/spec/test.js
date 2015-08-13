@@ -3,6 +3,8 @@
 
   	describe('Give it some context', function () {
 
+  		beforeEach(module('myapp'));
+
   		it('should run here few assertions', function () {
 
 	    	expect(true).toBeTruthy();

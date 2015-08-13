@@ -138,7 +138,11 @@ module.exports = function (grunt) {
     },
 
     nodeunit: {
-      all: ['test/spec/**/*.js']
+      all: [
+        'Gruntfile.js',
+        '<%= config.app %>/**/*.js',
+        'test/spec/**/*.js'
+      ]
     },
 
     // Mocha testing framework configuration options
@@ -414,7 +418,7 @@ module.exports = function (grunt) {
     if (target === 'travis') {
       grunt.task.run([
         //'jshint', 
-        'nodeunit'
+        'karma:dev'
       ]);
     }
     else {
