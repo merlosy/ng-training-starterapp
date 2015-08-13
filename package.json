@@ -33,7 +33,7 @@
     "time-grunt": "^0.4.0"
   },
   "scripts": {
-    "test" : "./node_modules/karma/bin/karma start --browsers Firefox --single-run"
+    "test" : "karma start --browsers Firefox --single-run"
   }
   "engines": {
     "node": ">=0.10.0"
