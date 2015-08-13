@@ -3,8 +3,75 @@
 		Sélectionnez un contact...
 	</p>
 	<div ng-show="person">
-		<p>La personne est : {{person.id}}</p>
-		<p>Son nom est {{person.firstname}}</p>
-		<p ng-show="person.favorite">C'est ton super pote!</p>
+		<div class="form-group">
+			<label class="radio-inline">
+  				<input type="radio" name="contact-mode" id="contact-mode-show" value="show" ng-model="contactMode"> Voir
+			</label>
+			<label class="radio-inline">
+  				<input type="radio" name="contact-mode" id="contact-mode-edit" value="edit" ng-model="contactMode"> Editer
+			</label>
+		</div>
+		<div ng-switch="contactMode">
+			<div ng-switch-when="show">
+				<p>La personne a l'id : {{person.id}}</p>
+				<p>Son nom est {{person.firstname}} {{person.lastname}}</p>
+				<p ng-show="person.email">Email me at <a ng-href="mailto:{{person.email}}">{{person.email}}</a></p>
+				<p ng-show="person.favorite">C'est ton super pote!</p>
+			</div>
+			<div ng-switch-when="edit">
+				<form class="form-horizontal" name="editContactForm" ng-submit="updateContact()" novalidate>
+					<div class="form-group">
+						<label class="control-label col-md-3" name="pFirstname" for="contact-firstname">Prénom :</label>
+						<div class="col-md-9">
+							<input class="form-control" id="contact-firstname" type="text" ng-model="editablePerson.firstname" required="">
+							<span ng-show="editContactForm.pFirstname.$error.required">Renseignez un prénom.</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3" for="contact-lastname">Nom :</label>
+						<div class="col-md-9">
+							<input class="form-control" id="contact-lastname" type="text" ng-model="editablePerson.lastname">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3" for="contact-email">E-mail :</label>
+						<div class="col-md-9">
+							<input class="form-control" id="contact-email" name="pEmail" type="email" ng-model="editablePerson.email">
+							<div ng-show="editContactForm.pEmail.$touched">
+      							<span ng-show="editContactForm.pEmail.$error.email">Ce n'est pas un e-mail valide!</span>
+    						</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3" for="contact-gender">Sexe :</label>
+						<div class="col-md-9">
+							<label class="radio-inline">
+				  				<input type="radio" name="contact-gender" id="contact-mode-male" value="male" ng-model="editablePerson.gender"> Homme
+							</label>
+							<label class="radio-inline">
+				  				<input type="radio" name="contact-gender" id="contact-mode-female" value="female" ng-model="editablePerson.gender"> Femme
+							</label>
+							<label class="radio-inline">
+				  				<input type="radio" name="contact-gender" id="contact-mode-undefined" value="undefined" ng-model="editablePerson.gender"> Indéfini
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+					    <div class="col-sm-offset-3 col-sm-9">
+					      <div class="checkbox">
+					        <label>
+				          		<input type="checkbox" ng-model="editablePerson.favorite"> Ajouter aux favoris
+				        	</label>
+				      		</div>
+				    	</div>
+				  	</div>
+					<div class="form-group">
+    					<div class="col-sm-offset-8 col-sm-4 text-right">
+      						<button type="submit" class="btn btn-default">Enregistrer</button>
+    					</div>
+  					</div>
+				</form>
+			</div>
+		</div>
 	</div>
 </div>

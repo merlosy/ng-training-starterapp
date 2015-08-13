@@ -53,7 +53,7 @@
                 $scope.people = ContactsService.query();
             });
 
-            if ( $scope.person!==undefined && $scope.person.id===person.id)
+            if ( Person.getSelected()!==undefined && Person.getSelected().id===person.id)
                     $scope.seePerson(undefined);
         };
 
@@ -61,7 +61,7 @@
             person.favorite = !person.favorite;
             ContactsService.update({id: person.id}, person, function(data){
 
-                if ( $scope.person!==undefined && $scope.person.id===person.id)
+                if ( Person.getSelected()!==undefined && Person.getSelected().id===person.id)
                     $scope.seePerson(person);
             });
         };
@@ -72,7 +72,9 @@
 
     }]);
 
-    app.controller('PersonDetailsController', ['$scope', '$log', 'Person', function($scope, $log, Person){
+    app.controller('PersonDetailsController', ['$scope', '$log', 'Person', 'ContactsService', function($scope, $log, Person, ContactsService){
+
+        $scope.contactMode = 'show';
 
         $scope.$watch(function(){
                 return Person.getSelected();
@@ -80,8 +82,20 @@
             function (newVal, oldVal) {
                 if(newVal!==oldVal) { 
                     $scope.person = newVal;
+                    $scope.contactMode = 'show';
                 }
             });
+
+        $scope.$watch('contactMode', function(newVal){
+            if (newVal==='edit') $scope.editablePerson = angular.copy($scope.person);
+        })
+
+        $scope.updateContact = function () {
+            ContactsService.update({id: $scope.editablePerson.id}, $scope.editablePerson, function(data){
+                Person.setSelected($scope.editablePerson);
+                $scope.contactMode = 'show';
+            });
+        };
 
     }]);
 
