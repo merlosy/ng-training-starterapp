@@ -10,7 +10,8 @@ before-install:
  - sh -e /etc/init.d/xvfb start
  - npm install -g grunt-cli bower
 before-script:
+ - npm install -g grunt-cli
  - npm install
  - bower install
  - grunt build
-script: grunt test:travis
+script: grunt test:travis --verbose
