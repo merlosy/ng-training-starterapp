@@ -18,6 +18,7 @@ Basé sur Yeoman generators:
 
 ### API
 - Utiliser votre API existant
+
 ou
 - Installer [Deployd] (~5min pour être opérationnel)
 
@@ -30,4 +31,4 @@ bower install
 ## TO DO
 - Unit tests
 
-[Deployd]:(http://deployd.com/)
+[Deployd]:http://deployd.com/
