@@ -357,8 +357,8 @@ module.exports = function (grunt) {
 
     // Run tests with Karma
     karma: {
-      junit: {
-        configFile : 'test/karma-jenkins.conf.js'
+      dev: {
+        configFile : 'test/karma-dev.conf.js'
       },
       dist: {
         configFile : 'test/karma.conf.js'
@@ -424,7 +424,7 @@ module.exports = function (grunt) {
     else {
       grunt.task.run([
         'connect:test',
-        'karma:dist'
+        'karma:dev'
       ]);
     }
   });
