@@ -33,7 +33,6 @@ module.exports = function(config) {
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/**/*.js',
-      'test/mock/**/*.js',
       'test/spec/**/*.js'
     ],
 
@@ -60,23 +59,22 @@ module.exports = function(config) {
     plugins: [
       "karma-phantomjs-launcher",
       "karma-jasmine",
-      "karma-coverage",
+      //"karma-coverage",
       //"karma-jasmine-html-reporter"
       "karma-htmlfile-reporter"
     ],
 
     // reporters declaration
-    reporters: ['html', 'coverage'],
+    reporters: ['html', 'progress'],//, 'coverage'],
 
     // COVERAGE Reporter
-    preprocessors: {
-      'app/**/*.js': ['coverage']
-    },
-    coverageReporter: {
-      type : 'html',
-      dir : 'test/results/coverage/',
-      subdir: '.'
-    },
+    // preprocessors: {
+    //   'app/**/*.js': ['coverage']
+    // },
+    // coverageReporter: {
+    //   type : 'html',
+    //   dir : 'test/results/coverage/'
+    // },
 
     // HTMLFILE Reporter
     htmlReporter: {

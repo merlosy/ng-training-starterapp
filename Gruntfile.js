@@ -91,10 +91,10 @@ module.exports = function (grunt) {
           port: 9001,
           middleware: function(connect) {
             return [
-              connect.static('.tmp'),
+              //connect.static('.tmp'),
               connect.static('test'),
-              connect().use('/bower_components', connect.static('./bower_components')),
-              connect.static(config.app)
+              connect().use('/bower_components', connect.static('./bower_components'))
+              //connect.static(config.app)
             ];
           }
         }
@@ -342,19 +342,19 @@ module.exports = function (grunt) {
     },
 
     // Remove line between DEBUG tags
-    preprocess : {
-        options: {
-            inline: true,
-            context : {
-                DEBUG: false
-            }
-        },
-        html : {
-            src : [
-                '<%= config.dist %>/index.html'
-            ]
-        }
-    },
+    // preprocess : {
+    //     options: {
+    //         inline: true,
+    //         context : {
+    //             DEBUG: false
+    //         }
+    //     },
+    //     html : {
+    //         src : [
+    //             '<%= config.dist %>/index.html'
+    //         ]
+    //     }
+    // },
 
     // Run tests with Karma
     karma: {
@@ -393,6 +393,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      //'clean:test_results',
       'concat:dev',
       'wiredep',
       'concurrent:server',
