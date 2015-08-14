@@ -138,16 +138,6 @@ module.exports = function (grunt) {
       ]
     },
 
-    // Mocha testing framework configuration options
-    // mocha: {
-    //   all: {
-    //     options: {
-    //       run: true,
-    //       urls: ['http://<%= connect.test.options.hostname %>:<%= connect.test.options.port %>/index.html']
-    //     }
-    //   }
-    // },
-
     // Add vendor prefixed styles
     autoprefixer: {
       options: {
@@ -255,31 +245,6 @@ module.exports = function (grunt) {
       }
     },
 
-    // By default, your `index.html`'s <!-- Usemin block --> will take care
-    // of minification. These next options are pre-configured if you do not
-    // wish to use the Usemin blocks.
-    // cssmin: {
-    //   dist: {
-    //     files: {
-    //       '<%= config.dist %>/styles/main.css': [
-    //         '.tmp/styles/{,*/}*.css',
-    //         '<%= config.app %>/styles/{,*/}*.css'
-    //       ]
-    //     }
-    //   }
-    // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= config.dist %>/scripts/scripts.js': [
-    //         '<%= config.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
     concat: {
       options: {
          separator: ';',
@@ -357,6 +322,13 @@ module.exports = function (grunt) {
         configFile : 'test/karma.conf.js'
       }
     },
+    
+    coveralls: {
+      options: {
+        debug: true,
+        coverage_dir: 'test/coverage'
+      }
+    },
 
     // Run some tasks in parallel to speed up build process
     concurrent: {
@@ -373,7 +345,6 @@ module.exports = function (grunt) {
       ]
     }
   });
-
 
   grunt.registerTask('serve', 'start the server and preview your app, --allow-remote for remote access', function (target) {
     if (grunt.option('allow-remote')) {
