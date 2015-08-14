@@ -25,7 +25,6 @@
     "grunt-wiredep": "~2.0.0",
     "jshint-stylish": "~2.0.0",
     "karma": "~0.13",
-    "karma-coverage": "^0.5.0",
     "karma-htmlfile-reporter": "~0.2",
     "karma-jasmine": "~0.2.0",
     "karma-jasmine-html-reporter": "~0.1",
