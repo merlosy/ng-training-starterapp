@@ -23,16 +23,16 @@ module.exports = function(config) {
     files: [
         // bower:js
       'bower_components/jquery/dist/jquery.js',
-      'bower_components/angular/angular.js',
       'bower_components/bootstrap/dist/js/bootstrap.js',
+      'bower_components/angular/angular.js',
       'bower_components/angular-aria/angular-aria.js',
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/angular-resource/angular-resource.js',
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
-      'dist/**/*.js',
-      'test/mock/**/*.js',
+      'app/**/*.js',
       'test/spec/**/*.js'
     ],
 
@@ -60,6 +60,8 @@ module.exports = function(config) {
       "karma-phantomjs-launcher",
       "karma-jasmine"
     ],
+
+    reporters: ['progress'],
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit

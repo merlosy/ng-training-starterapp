@@ -120,7 +120,7 @@ module.exports = function (grunt) {
         }]
       },
       server: '.tmp',
-      test_results: 'test/results'
+      testResults: 'test/results'
     },
 
     // Make sure code styles are up to par and there are no obvious mistakes
@@ -135,14 +135,6 @@ module.exports = function (grunt) {
         '!<%= config.app %>/scripts/vendor/*',
         //'!<%= config.app %>/**/*.mock.js',
         'test/spec/{,*/}*.js'
-      ]
-    },
-
-    nodeunit: {
-      all: [
-        'Gruntfile.js',
-        '<%= config.app %>/**/*.js',
-        'test/spec/**/*.js'
       ]
     },
 
@@ -342,19 +334,19 @@ module.exports = function (grunt) {
     },
 
     // Remove line between DEBUG tags
-    // preprocess : {
-    //     options: {
-    //         inline: true,
-    //         context : {
-    //             DEBUG: false
-    //         }
-    //     },
-    //     html : {
-    //         src : [
-    //             '<%= config.dist %>/index.html'
-    //         ]
-    //     }
-    // },
+    preprocess : {
+        options: {
+            inline: true,
+            context : {
+                DEBUG: false
+            }
+        },
+        html : {
+            src : [
+                '<%= config.dist %>/index.html'
+            ]
+        }
+    },
 
     // Run tests with Karma
     karma: {
@@ -393,7 +385,6 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      //'clean:test_results',
       'concat:dev',
       'wiredep',
       'concurrent:server',
@@ -419,13 +410,13 @@ module.exports = function (grunt) {
 
     if (target === 'travis') {
       grunt.task.run([
-        'build',
+        'clean:testResults',
         'karma:dist'
       ]);
     }
     else {
       grunt.task.run([
-        'clean:test_results',
+        'clean:testResults',
         'connect:test',
         'karma:dev'
       ]);

@@ -71,3 +71,39 @@ body {
 .text-red {
   color: #e15423;
 }
+
+/*************************************
+ *              PERSON
+ ************************************/
+
+ .person-container {
+  display: block;
+  width: 100%;
+  background-color: #f2f2f2;
+  margin-bottom: 10px;
+}
+
+.person-container .row > div:first-child {
+  padding: 10px;
+}
+.person-container .row > div:last-child {
+  width: 100%;
+}
+
+.person-container .btn-simple {
+  background-color: transparent;
+  width: 33.3333333%;
+}
+.person-container .btn-simple:focus,
+.person-container .btn-simple:hover {
+  background-color: #eeeeee;
+}
+
+.person-container .btn-simple.btn-danger:focus,
+.person-container .btn-simple.btn-danger:hover {
+  color: #c9302c;
+}
+.person-container .btn-simple.btn-primary:focus,
+.person-container .btn-simple.btn-primary:hover {
+  color: #286090;
+}

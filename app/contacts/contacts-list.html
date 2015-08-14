@@ -19,13 +19,13 @@
 		</div>
 	</form>
 	<p>Mes amis sont :</p>
-	<ul>
-		<li ng-repeat="person in people | orderBy:'firstname' | filter:{firstname:friendFilter}">
+	<div class="row">
+		<div class="col-md-3 col-sm-4 col-xs-6" ng-repeat="person in people | orderBy:'firstname' | filter:{firstname:friendFilter}">
 			<person-tile person="person" 
 					on-favorite="toggleFavorite(person)" 
 					on-see="seePerson(person)" 
 					on-delete="removePerson(person)">
 			</person-tile>
-		</li>
-	</ul>
+		</div>
+	</div>
 </div>

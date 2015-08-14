@@ -6,6 +6,12 @@
   "camelcase": true,
   "curly": true,
   "eqeqeq": true,
+  "globals": {
+    "angular"   : false,
+    "jasmine"   : false,
+    "module"    : false,
+    "require"   : false
+  },
   "immed": true,
   "indent": 2,
   "latedef": true,

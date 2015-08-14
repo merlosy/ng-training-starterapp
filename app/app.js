@@ -1,7 +1,6 @@
 (function(){
-
 	'use strict';
-
+    
 	var app = angular.module('myapp', [
         // vendor modules
 		'ui.router',
@@ -21,7 +20,7 @@
     	$logProvider.debugEnabled(APP.debugActive);
     	
     	$stateProvider.state('home', {
-    		url: "/",
+    		url: '/',
     		views : {
     			'' : {
     				templateUrl: 'home/home.html'

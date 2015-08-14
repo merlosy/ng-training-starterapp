@@ -1,35 +1,46 @@
 (function(){
-	'use strict'
+	'use strict';
 
 	var app = angular.module('myapp.contacts.person', []);
 
 
-	app.factory('Person', ['$log', function($log){ 
-		var person = undefined;
-		return {
-			getSelected : function() {
-				return person;
-			},
-			setSelected : function(p) {
-				person = p;
-			}
-		};
+	app.service('Person', ['$q', function($q){ 
+		var self = this,
+        	deferred = $q.defer();
+
+        this.person = undefined;
+
+        this.onChange = function() {
+	        return deferred.promise;
+	    };
+
+	    this.getSelected = function() {
+	        return self.person;
+	    };
+
+	    this.setSelected = function(person) {
+	        self.person = person;
+	        deferred.notify(self.person);
+	    };
 	}]);
 
 	app.directive('personTile', ['$log', function($log){
         return {
             restrict: 'E',
             replace: true,
-            template: '<div class="person-container">{{person.firstname}} '
-				+'<button type="button" class="btn btn-xs btn-default btn-simple" ng-click="eventFavorite(person)">'
-				+'	<span class="glyphicon glyphicon-heart"'
-				+'		ng-class="{\'text-red\' : person.favorite}">'
-				+'	</span>'
-				+'</button>'
-				+'<button class="btn btn-xs btn-primary" type="button" ng-click="eventSee(person)">Voir</a>'
-				+'<button class="btn btn-xs btn-danger" type="button" ng-click="delete(person)" aria-label="Supprimer" title="Supprimer">'
-				+'	<span class="glyphicon glyphicon-remove"></span>'
-				+'</button></div>',
+            template: '<div class="person-container"><div class="row" >'
+            	+'<div class="col-md-12 text-center">{{person.firstname}}</div> '
+				+'<div class="col-md-12 btn-group" role="group">'
+				+'	<button type="button" class="btn btn-sm btn-default btn-simple" ng-click="eventFavorite(person)">'
+				+'		<span class="glyphicon glyphicon-heart"'
+				+'			ng-class="{\'text-red\' : person.favorite}">'
+				+'		</span>'
+				+'	</button>'
+				+'	<button class="btn btn-sm btn-primary btn-simple" type="button" ng-click="eventSee(person)"><span class="glyphicon glyphicon-eye-open"></span></buttom>'
+				+'	<button class="btn btn-sm btn-danger btn-simple" type="button" ng-click="delete(person)" aria-label="Supprimer" title="Supprimer">'
+				+'		<span class="glyphicon glyphicon-remove"></span>'
+				+'	</button>'
+				+'</div></div></div>',
 			scope : {
 				person : '=',
 				eventSee : '&onSee',

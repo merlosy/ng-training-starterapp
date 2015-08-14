@@ -1,5 +1,5 @@
 (function(){
-	'use strict'
+	'use strict';
 
 	var app = angular.module('myapp.contacts', [
         'ui.router',
@@ -15,7 +15,7 @@
         });
 
         $stateProvider.state('contacts', {
-            url: "/contacts",
+            url: '/contacts',
             parent: 'templateContacts',
             views : {
                 'left' : {
@@ -29,8 +29,8 @@
 
     }]);
 
-    app.controller('PersonListController', ['$scope', '$log', 'ContactsService', 'Person',
-                                    function($scope, $log, ContactsService, Person){
+    app.controller('PersonListController', ['$scope', '$rootScope', '$log', 'ContactsService', 'Person',
+                                    function($scope, $rootScope, $log, ContactsService, Person){
         
         // Initialisation de la vue
         $scope.people = ContactsService.query();
@@ -70,21 +70,23 @@
             Person.setSelected(person);
         };
 
+        $rootScope.$on('update-select-person', function(event, person){
+            angular.forEach($scope.people, function(item, key){
+                if (person.id===item.id)    $scope.people[key] = person;
+            });
+        });
+
     }]);
 
-    app.controller('PersonDetailsController', ['$scope', '$log', 'Person', 'ContactsService', function($scope, $log, Person, ContactsService){
+    app.controller('PersonDetailsController', ['$scope', '$rootScope', '$log', 'Person', 'ContactsService', 
+                                    function($scope, $rootScope, $log, Person, ContactsService){
 
         $scope.contactMode = 'show';
 
-        $scope.$watch(function(){
-                return Person.getSelected();
-            }, 
-            function (newVal, oldVal) {
-                if(newVal!==oldVal) { 
-                    $scope.person = newVal;
-                    $scope.contactMode = 'show';
-                }
-            });
+        Person.onChange().then(null, null, function(person){
+            $scope.person = person;
+            $scope.contactMode = 'show';
+        });
 
         $scope.$watch('contactMode', function(newVal){
             if (newVal==='edit') $scope.editablePerson = angular.copy($scope.person);
@@ -93,7 +95,7 @@
         $scope.updateContact = function () {
             ContactsService.update({id: $scope.editablePerson.id}, $scope.editablePerson, function(data){
                 Person.setSelected($scope.editablePerson);
-                $scope.contactMode = 'show';
+                $rootScope.$broadcast('update-select-person', $scope.editablePerson);
             });
         };
 
