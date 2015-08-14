@@ -60,20 +60,27 @@ module.exports = function(config) {
     plugins: [
       "karma-phantomjs-launcher",
       "karma-jasmine",
-      "karma-jasmine-html-reporter",
-      'karma-coverage'
+      "karma-coverage",
+      //"karma-jasmine-html-reporter"
+      "karma-htmlfile-reporter"
     ],
 
+    // reporters declaration
+    reporters: ['html', 'coverage'],
+
+    // COVERAGE Reporter
+    preprocessors: {
+      'app/**/*.js': ['coverage']
+    },
     coverageReporter: {
-      type : 'lcov',
-      dir : 'test/results/',
+      type : 'html',
+      dir : 'test/results/coverage/',
       subdir: '.'
     },
 
-    reporters: ['html', 'coverage'],
-
+    // HTMLFILE Reporter
     htmlReporter: {
-      outputFile: 'results/unit-tests-dev.html'
+      outputFile: 'test/results/unit-tests-dev.html'
     },
 
     // Continuous Integration mode

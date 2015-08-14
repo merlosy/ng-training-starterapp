@@ -119,7 +119,8 @@ module.exports = function (grunt) {
           ]
         }]
       },
-      server: '.tmp'
+      server: '.tmp',
+      test_results: 'test/results'
     },
 
     // Make sure code styles are up to par and there are no obvious mistakes
@@ -423,6 +424,7 @@ module.exports = function (grunt) {
     }
     else {
       grunt.task.run([
+        'clean:test_results',
         'connect:test',
         'karma:dev'
       ]);
