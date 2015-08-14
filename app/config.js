@@ -5,7 +5,7 @@
    var appModule = angular.module('myapp.constants', []);
 
 	appModule.constant('APP', {
-		debugActive: false,
+		debugActive: true,
 
 		templatePrefix : '',
 
