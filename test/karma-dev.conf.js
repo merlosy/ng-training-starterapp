@@ -59,31 +59,33 @@ module.exports = function(config) {
     plugins: [
       "karma-phantomjs-launcher",
       "karma-jasmine",
-      //"karma-coverage",
-      //"karma-jasmine-html-reporter"
-      "karma-htmlfile-reporter"
+      "karma-coverage",
+      "karma-jasmine-html-reporter"
+      //"karma-htmlfile-reporter"
     ],
 
     // reporters declaration
-    reporters: ['html', 'progress'],//, 'coverage'],
+    reporters: ['html', 'progress', 'coverage'],
 
     // COVERAGE Reporter
-    // preprocessors: {
-    //   'app/**/*.js': ['coverage']
-    // },
-    // coverageReporter: {
-    //   type : 'html',
-    //   dir : 'test/results/coverage/'
-    // },
+    preprocessors: {
+      'app/**/*.js': ['coverage']
+    },
+    coverageReporter: {
+      dir: 'test/results/coverage/',
+      reporters: [
+        {type: 'text-summary'}
+      ]
+    },
 
     // HTMLFILE Reporter
-    htmlReporter: {
-      outputFile: 'test/results/unit-tests-dev.html'
-    },
+    // htmlReporter: {
+    //   outputFile: 'test/results/unit-tests-dev.html'
+    // },
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
-    singleRun: true,
+    singleRun: false,
 
     colors: true,
 
