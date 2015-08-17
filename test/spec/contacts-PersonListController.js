@@ -41,6 +41,7 @@
 
       it('ajouter une personne doit appeler le service', function () {
         var p = {firstname:"Jimmy"};
+        expect(scope.addPerson).toBeDefined();
         scope.addPerson(p);
         expect(ContactsService.save).toHaveBeenCalled();
         expect(ContactsService.save.calls.count()).toEqual(1);
@@ -48,6 +49,7 @@
 
       it('toggleFavorite doit enlever des favoris', function () {
         var p = {firstname:'Jimmy', id:'00100', favorite:true};
+        expect(scope.toggleFavorite).toBeDefined();
         scope.toggleFavorite(p);
         expect(p.favorite).toBeFalsy();
       });
@@ -69,6 +71,7 @@
 
       it('supprimer une personne doit appeler le service', function () {
         var p = {firstname:'Jimmy', id:'00100', favorite:true};
+        expect(scope.removePerson).toBeDefined();
         scope.removePerson(p);
         expect(ContactsService.delete).toHaveBeenCalled();
         expect(ContactsService.delete.calls.count()).toEqual(1);
