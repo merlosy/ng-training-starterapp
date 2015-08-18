@@ -7,14 +7,40 @@
 
     describe('PersonDetailsController', function() {
 
-    	var controller, Person, scope, $rootScope, 
+    	var controller, Person, scope, $rootScope, $timeout, $httpBackend,
     		ContactsService, $q;
 
-    	beforeEach(inject(function( $controller, _$rootScope_, _Person_, _$q_){
+      var p;
+      var setAsyncSelected = function() {
+        $timeout(function(){
+          p = {firstname:'Jimmy', id:'00100', favorite:false};
+          Person.setSelected(p);
+        }, 1000);
+      };
+
+      // var asyncChangedSelected = function() {
+      //   var deffered = $q.defer();
+      //   deffered.promise.then(function(){
+      //     return Person.onChange().then(null, null, function(person){
+      //       return person;
+      //     });
+      //   });
+      //   return deffered.promise;
+      // };
+
+      // var asyncUpdateContact = function(scope) {
+      //   $q.when().then(function(){
+      //     scope.updateContact();
+      //   });
+      // };
+
+    	beforeEach(inject(function( $controller, _$rootScope_, _Person_, _$q_, _$timeout_, _$httpBackend_){
     		// The injector unwraps the underscores (_) from around the parameter names when matching
     		Person = _Person_;
     		$rootScope = _$rootScope_;
     		$q = _$q_;
+        $timeout = _$timeout_;
+        $httpBackend = _$httpBackend_;
 
     		scope = $rootScope.$new();
 
@@ -43,30 +69,18 @@
       });
 
       it('doit mettre à jour la personne selectionnée dans le scope', function () {
-        var p = {firstname:'Jimmy', id:'00100', favorite:false};
-        var setAsyncSelected = function(p){
-          var deffered = $q.defer();
-          Person.setSelected(p);
-          return deffered.promise;
-        };
+        setAsyncSelected();
         expect(scope.person).toBeUndefined();
-        setAsyncSelected(p).then(function(){
-          expect(scope.person).toEqual(p);
-        });
+        $timeout.flush();
+        expect(scope.person).toEqual(p);
       });
 
       it('doit mettre à jour la personne éditable dans le scope', function () {
-        var p = {firstname:'Jimmy', id:'00100', favorite:false};
-        var setAsyncSelected = function(p){
-          var deffered = $q.defer();
-          Person.setSelected(p);
-          return deffered.promise;
-        };
-        setAsyncSelected(p).then(function(){
-          scope.contactMode = 'edit';
-          scope.$digest();
-          expect(scope.editablePerson).toEqual(p);
-        });
+        setAsyncSelected();
+        $timeout.flush();
+        scope.contactMode = 'edit';
+        scope.$digest();
+        expect(scope.editablePerson).toEqual(p);
       });
 
       it('doit mettre à jour la personne après édition', function () {
@@ -78,32 +92,34 @@
         expect(ContactsService.update.calls.argsFor(0)[1]).toEqual(scope.editablePerson);
       });
 
-      it('doit mettre à jour la personne sélectionnée après appel service', function () {
-        scope.editablePerson = {firstname:'Jim', id:'00100', favorite:true, lastname: 'Ramsay'};
-        var asyncUpdateContact = function(){
-          var deffered = $q.defer();
-          scope.updateContact();
-          return deffered.promise;
-        };
-        asyncUpdateContact().then(function(){
-          expect(scope.person).toEqual(scope.editablePerson);
-        });
+      // false positive
+      // it('doit mettre à jour la personne sélectionnée après appel service', function () {
+      //   var p = null;
+      //   ContactsService.update.and.stub();
+      //   scope.editablePerson = {firstname:'Jim', id:'00100', favorite:true, lastname: 'Ramsay'};
+      //   asyncUpdateContact(scope);
+      //   asyncChangedSelected().then(function(pers){
+      //     console.log(pers);
+      //     p = pers;
+      //   });
+      //   $rootScope.$apply();
+      //   expect(ContactsService.update).toHaveBeenCalled();
+      //   expect(p).toEqual(scope.editablePerson);
+      // });
 
-      });
-
-      it('doit emettre la mise à jour après appel service', function () {
-        scope.editablePerson = {firstname:'Jim', id:'00100', favorite:true, lastname: 'Ramsay'};
-        var asyncUpdateContact = function(){
-          var deffered = $q.defer();
-          scope.updateContact();
-          return deffered.promise;
-        };
-        asyncUpdateContact().then(function(){
-          expect($rootScope.$broadcast).toHaveBeenCalled();
-          expect($rootScope.$broadcast).toHaveBeenCalledWith('update-select-person', scope.editablePerson);
-        });
-
-      });
+      // false positive 
+      // it('doit emettre la mise à jour après appel service', function () {
+      //   scope.editablePerson = {firstname:'Jim', id:'00100', favorite:true, lastname: 'Ramsay'};
+      //   var asyncUpdateContact = function(){
+      //     var deffered = $q.defer();
+      //     scope.updateContact();
+      //     return deffered.promise;
+      //   };
+      //   asyncUpdateContact().then(function(){
+      //     expect($rootScope.$broadcast).toHaveBeenCalled();
+      //     expect($rootScope.$broadcast).toHaveBeenCalledWith('update-select-person', scope.editablePerson);
+      //   });
+      // });
     	
     });
 

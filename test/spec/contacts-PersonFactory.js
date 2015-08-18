@@ -28,11 +28,12 @@
         expect(pers).toEqual(p);
       });
 
+      // false positive
       it('une modification doit déclencher la promise', function () {
         var p = {firstname:'Jimmy', id:'00100', favorite:false};
 
         Person.onChange().then(null, null, function(pers) {
-          expect(pers).toBe(p);
+          expect(pers).toBe(1);
         });
 
         Person.setSelected(p);
