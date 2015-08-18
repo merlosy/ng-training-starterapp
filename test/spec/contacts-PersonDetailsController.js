@@ -68,6 +68,10 @@
         expect(scope.updateContact).toBeDefined();
       });
 
+      it('doit créer le controller et ne pas appeler de service par défaut', function () {
+        expect(ContactsService.update).not.toHaveBeenCalled();
+      });
+
       it('doit mettre à jour la personne selectionnée dans le scope', function () {
         setAsyncSelected();
         expect(scope.person).toBeUndefined();
@@ -81,6 +85,14 @@
         scope.contactMode = 'edit';
         scope.$digest();
         expect(scope.editablePerson).toEqual(p);
+      });
+
+      it('ne doit pas mettre à jour la personne éditable dans le scope', function () {
+        setAsyncSelected();
+        $timeout.flush();
+        scope.contactMode = 'blah';
+        scope.$digest();
+        expect(scope.editablePerson).not.toEqual(p);
       });
 
       it('doit mettre à jour la personne après édition', function () {

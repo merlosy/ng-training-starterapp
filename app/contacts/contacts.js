@@ -39,7 +39,6 @@
             var person = {firstname: name};
             $scope.newFriend = '';
             ContactsService.save(person, function(data){
-                $log.debug(data);
                 // on rappelle le service pour avoir la liste à jour
                 $scope.people = ContactsService.query();
             });
@@ -48,7 +47,6 @@
 
         $scope.removePerson = function (person) {
             ContactsService.delete({id: person.id}, function(data){
-                $log.debug(data);
                 // on rappelle le service pour avoir la liste à jour
                 $scope.people = ContactsService.query();
             });
