@@ -45,7 +45,17 @@
     		scope = $rootScope.$new();
 
     		ContactsService = jasmine.createSpyObj('ContactsService', ['update']);
-        ContactsService.update.and.returnValue($q.when({}));
+        // ContactsService.update.and.returnValue($q.when({}));
+        // ContactsService = {
+        //   update: function(){
+        //         var deferred = $q.defer();
+        //         deferred.resolve({
+        //             success: true
+        //         });
+        //         return deferred.promise;
+        //     }
+        // };
+        // spyOn(ContactsService, 'update').and.callThrough();
 
         spyOn($rootScope, '$broadcast');
 
@@ -105,21 +115,26 @@
       });
 
       // false positive
+      it('doit mettre à jour la personne sélectionnée après appel service');
       // it('doit mettre à jour la personne sélectionnée après appel service', function () {
       //   var p = null;
-      //   ContactsService.update.and.stub();
+      //   spyOn(Person, 'setSelected').and.callThrough();
       //   scope.editablePerson = {firstname:'Jim', id:'00100', favorite:true, lastname: 'Ramsay'};
-      //   asyncUpdateContact(scope);
-      //   asyncChangedSelected().then(function(pers){
-      //     console.log(pers);
-      //     p = pers;
-      //   });
-      //   $rootScope.$apply();
-      //   expect(ContactsService.update).toHaveBeenCalled();
-      //   expect(p).toEqual(scope.editablePerson);
+      //   scope.updateContact();
+      //   // asyncChangedSelected().then(function(pers){
+      //   //   console.log(pers);
+      //   //   p = pers; 
+      //   // });
+      //   //$rootScope.$apply();
+      //   //$httpBackend.flush();
+      //   scope.$digest();
+      //   expect(Person.setSelected).toHaveBeenCalled();
+      //   expect($rootScope.$broadcast).toHaveBeenCalled();
+      //   //expect(scope.person).toEqual(scope.editablePerson);
       // });
 
       // false positive 
+      it('doit emettre la mise à jour après appel service');
       // it('doit emettre la mise à jour après appel service', function () {
       //   scope.editablePerson = {firstname:'Jim', id:'00100', favorite:true, lastname: 'Ramsay'};
       //   var asyncUpdateContact = function(){

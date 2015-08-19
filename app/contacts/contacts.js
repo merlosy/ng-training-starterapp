@@ -49,10 +49,10 @@
             ContactsService.delete({id: person.id}, function(data){
                 // on rappelle le service pour avoir la liste à jour
                 $scope.people = ContactsService.query();
-            });
 
-            if ( Person.getSelected()!==undefined && Person.getSelected().id===person.id)
+                if ( Person.getSelected()!==undefined && Person.getSelected().id===person.id)
                     $scope.seePerson(undefined);
+            });
         };
 
         $scope.toggleFavorite = function (person) {
