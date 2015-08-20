@@ -320,6 +320,9 @@ module.exports = function (grunt) {
       },
       dist: {
         configFile : 'test/karma.conf.js'
+      },
+      jenkins: {
+        configFile : 'test/karma-jenkins.conf.js'
       }
     },
     
@@ -385,6 +388,12 @@ module.exports = function (grunt) {
         'karma:dist'
       ]);
     }
+    else if (target === 'jenkins') {
+      grunt.task.run([
+        'clean:testResults',
+        'karma:jenkins'
+      ]);
+    }
     else {
       grunt.task.run([
         'clean:testResults',
@@ -394,22 +403,31 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('build', [
-    'clean:dist',
-    'concat:dist',
-    'wiredep',
-    'useminPrepare',
-    'concurrent:dist',
-    'autoprefixer',
-    'concat:generated',
-    'cssmin',
-    'uglify',
-    'copy:dist',
-    'rev',
-    'usemin',
-    'htmlmin',
-    'preprocess:html'
-  ]);
+  grunt.registerTask('build', function(target) {
+    if (target === 'jenkins') {
+      grunt.task.run([
+        'newer:jshint',
+        'test:jenkins'
+      ]);
+    }
+
+    grunt.task.run([
+      'clean:dist',
+      'concat:dist',
+      'wiredep',
+      'useminPrepare',
+      'concurrent:dist',
+      'autoprefixer',
+      'concat:generated',
+      'cssmin',
+      'uglify',
+      'copy:dist',
+      'rev',
+      'usemin',
+      'htmlmin',
+      'preprocess:html'
+    ]);
+  });
 
   grunt.registerTask('default', [
     'newer:jshint',

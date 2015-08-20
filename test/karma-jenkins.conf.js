@@ -67,21 +67,21 @@ module.exports = function(config) {
 
     // Which plugins to enable
     plugins: [
-      	"karma-phantomjs-launcher",
-      	"karma-jasmine",
-      	'karma-junit-reporter',
-  		  'karma-coverage'
+    	"karma-phantomjs-launcher",
+    	"karma-jasmine",
+    	'karma-junit-reporter',
+		  'karma-coverage'
     ],
 
     junitReporter: {
-		  outputFile: 'test-results-jenkins.xml'
-	   },
+		  outputFile: 'test/results/test-results-jenkins.xml'
+	  },
 
-	coverageReporter: {
-		type : 'lcov',
-		dir : 'test/results/',
-		subdir: '.'
-	},
+  	coverageReporter: {
+  		type : 'lcov',
+  		dir : 'test/results/',
+  		subdir: '.'
+  	},
 
     reporters: ['dots', 'junit', 'coverage'],
 
